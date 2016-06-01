@@ -75,11 +75,6 @@
 ;;; Allow y/n for yes/no questions
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;;; Abbrev
-(setq abbrev-file-name "~/.emacs.d/abbrev_defs")    ;; tell emacs where to read abbrev definitions from...
-(setq save-abbrevs t)                               ;; save abbrevs when files are saved
-(setq-default abbrev-mode t)
-
 ;;; Recent Files
 (require 'recentf)
 (recentf-mode 1)
@@ -87,8 +82,6 @@
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
 ;;; Markdown Mode
-(add-to-list 'load-path "~/.emacs.d/markdown-mode/")
-(autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
@@ -152,7 +145,6 @@
 (setq ispell-program-name "aspell")
 (setq ispell-dictionary "german8")
 
-
 ;; IDO Mode
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
@@ -167,11 +159,52 @@
 (yas-global-mode 1)
 (yas-reload-all)
 
+;; Have YAS choose values use a popup menu
+(require 'popup)
+; add some shotcuts in popup menu mode
+(define-key popup-menu-keymap (kbd "M-n") 'popup-next)
+(define-key popup-menu-keymap (kbd "TAB") 'popup-next)
+(define-key popup-menu-keymap (kbd "<tab>") 'popup-next)
+(define-key popup-menu-keymap (kbd "<backtab>") 'popup-previous)
+(define-key popup-menu-keymap (kbd "M-p") 'popup-previous)
+
+(defun yas-popup-isearch-prompt (prompt choices &optional display-fn)
+  (when (featurep 'popup)
+    (popup-menu*
+     (mapcar
+      (lambda (choice)
+        (popup-make-item
+         (or (and display-fn (funcall display-fn choice))
+             choice)
+         :value choice))
+      choices)
+     :prompt prompt
+     ;; start isearch mode immediately
+     :isearch t
+     )))
+
+(setq yas-prompt-functions '(yas-popup-isearch-prompt yas-ido-prompt yas-no-prompt))
+
 ;; Hl line mode
 (global-hl-line-mode)
 
+;;;;
+;; OSX specific stuff
+;;;;
+(when (eq system-type 'darwin)
+
+  ;; set the functionality of the apple keys 
+  (setq mac-option-modifier nil
+        mac-command-modifier 'meta
+        x-select-enable-clipboard t)  
+
+  ;; set the default font properly
+  (set-face-attribute 'default nil :family "Monaco")
+  (set-face-attribute 'default nil :height 160)
+)
+
 ;; Goto Homedirectory
-;;(cd "C:/Users/hilb_ro")
+(setq default-directory (concat (getenv "HOME") "/"))
 
 ;;; Default-Mode setzen
 (setq default-major-mode 'text-mode)

@@ -2,5 +2,5 @@
 # name: jour fixe protocol task
 # key: tsk
 # --
-[TASK ${1:$$(yas-choose-value '("BeM" "HiR" "ErJ"))} | $2] $0
+[TASK ${1:$$(yas-choose-value '("Micha" "Jakob" "Gregor" "Leo" "Yun-Pang" "Robert"))} | ${2:`(format-time-string "%d.%m." (time-add (current-time) (days-to-time 7)))`}] $0
 
