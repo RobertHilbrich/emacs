@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: jour fixe protocol task
+# key: tsk
+# --
+[TASK ${1:$$(yas-choose-value '("BeM" "HiR" "ErJ"))} | $2] $0
+
