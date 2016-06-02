@@ -56,7 +56,7 @@
  '(default ((t (:family "Consolas" :foundry "outline" :slant normal :weight normal :height 128 :width normal))))
  '(company-preview ((t (:foreground "dim gray"))))
  '(company-preview-common ((t (:foreground "dim gray"))))
- '(hl-line ((t (:background "gray25"))))
+ '(hl-line ((t (:background "gray18"))))
  '(ido-first-match ((t (:foreground "#ccff66"))))
  '(ido-incomplete-regexp ((t (:foreground "#ffffff"))))
  '(ido-indicator ((t (:foreground "#ffffff"))))
