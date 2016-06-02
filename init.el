@@ -51,6 +51,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Consolas" :foundry "outline" :slant normal :weight normal :height 128 :width normal))))
+ '(company-preview ((t (:foreground "dim gray"))))
  '(company-preview-common ((t (:foreground "dim gray"))))
  '(hl-line ((t (:background "gray25"))))
  '(ido-first-match ((t (:foreground "#ccff66"))))
@@ -69,8 +70,12 @@
 (setq user-mail-address "Robert.Hilbrich@dlr.de")
 (setq user-full-name "Robert Hilbrich")
 
-;;; No Backup Files
-(setq make-backup-files nil) 
+;;; Disable Autosave
+;; #FILE#
+(setq auto-save-default nil)
+
+;; Disable Backup Files
+(setq make-backup-files nil)
 
 ;;; Allow y/n for yes/no questions
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -188,6 +193,9 @@
 ;; Hl line mode
 (global-hl-line-mode)
 
+;;; Elisp stuff
+(add-hook 'emacs-lisp-mode-hook 'company-mode)
+
 ;;;;
 ;; OSX specific stuff
 ;;;;
@@ -201,6 +209,15 @@
   ;; set the default font properly
   (set-face-attribute 'default nil :family "Monaco")
   (set-face-attribute 'default nil :height 160)
+)
+
+;;;;
+;; LINUX specific stuff
+;;;;
+(when (eq system-type 'gnu/linux)
+  ;; set the default font properly
+  (set-face-attribute 'default nil :family "Consolas")
+  (set-face-attribute 'default nil :height 140)
 )
 
 ;; Goto Homedirectory
