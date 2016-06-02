@@ -37,7 +37,7 @@
  '(inhibit-startup-echo-area-message t)
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
- '(linum-format "%d ")
+ '(linum-format "%d")
  '(menu-bar-mode nil)
  '(minimap-window-location (quote right))
  '(scroll-bar-mode nil)
