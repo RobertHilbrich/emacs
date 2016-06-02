@@ -33,14 +33,17 @@
  '(TeX-view-program-selection (quote ((output-pdf "Sumatra PDF"))))
  '(custom-enabled-themes (quote (wombat)))
  '(fringe-mode (quote (0)) nil (fringe))
+ '(global-linum-mode t)
  '(inhibit-startup-echo-area-message t)
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
+ '(linum-format "%d ")
  '(menu-bar-mode nil)
  '(minimap-window-location (quote right))
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
- '(tool-bar-mode nil))
+ '(tool-bar-mode nil)
+ '(transient-mark-mode t))
 
 (load "server")
 (unless (server-running-p) (server-start))
@@ -59,6 +62,7 @@
  '(ido-indicator ((t (:foreground "#ffffff"))))
  '(ido-only-match ((t (:foreground "#ffcc33"))))
  '(ido-subdir ((t (:foreground "#66ff00"))))
+ '(linum ((t (:inherit (shadow default) :foreground "gray25" :height 90))))
  '(region ((t (:background "brown" :foreground "white")))))
 
 ;;; Packages
@@ -71,18 +75,22 @@
 (setq user-full-name "Robert Hilbrich")
 
 ;;; Disable Autosave
-;; #FILE#
 (setq auto-save-default nil)
 
 ;; Disable Backup Files
 (setq make-backup-files nil)
 
-;;; Allow y/n for yes/no questions
+;; Smooth Scrolling
+(setq scroll-step 1)
+(setq scroll-conservatively 10000)
+(setq auto-window-vscroll nil)
+
+;; Allow y/n for yes/no questions
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;;; Recent Files
 (require 'recentf)
-(recentf-mode 1)
+(recentf-mode)
 (setq recentf-max-menu-items 10)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
@@ -113,13 +121,9 @@
 		      (TeX-PDF-mode t)
 		      (TeX-fold-mode)
 		      (visual-line-mode)
-;;		      (auto-fill-mode t)
 		      (define-key LaTeX-mode-map (kbd "<f5>") 'TeX-command-master) 
 		      (define-key LaTeX-mode-map (kbd "<f6>") 'TeX-next-error)
 		      (define-key LaTeX-mode-map (kbd "<f7>") 'TeX-view)
-		      (linum-mode t)
-		      (set-face-attribute 'linum nil :height 90)
-		      (setq linum-format "%d ")
 		      (setq fill-column 12000)
 		      (auto-fill-mode)
 	  ))
