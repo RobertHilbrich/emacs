@@ -63,6 +63,9 @@
  '(ido-only-match ((t (:foreground "#ffcc33"))))
  '(ido-subdir ((t (:foreground "#66ff00"))))
  '(linum ((t (:inherit (shadow default) :foreground "gray25" :height 90))))
+ '(markdown-header-face-1 ((t (:inherit markdown-header-face :height 1.5))))
+ '(markdown-header-face-2 ((t (:inherit markdown-header-face :height 1.2))))
+ '(markdown-header-face-3 ((t (:inherit markdown-header-face :height 1))))
  '(region ((t (:background "brown" :foreground "white")))))
 
 ;;; Packages
@@ -95,7 +98,7 @@
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
 ;;; Markdown Mode
-(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
@@ -223,6 +226,8 @@
   (set-face-attribute 'default nil :family "Consolas")
   (set-face-attribute 'default nil :height 140)
 )
+
+
 
 ;; Goto Homedirectory
 (setq default-directory (concat (getenv "HOME") "/"))
