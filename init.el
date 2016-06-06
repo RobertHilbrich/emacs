@@ -38,6 +38,8 @@
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
  '(linum-format "%d")
+ '(markdown-header-scaling t)
+ '(markdown-header-scaling-values (quote (1.5 1.3 1.1 1.0 1.0 1.0)))
  '(menu-bar-mode nil)
  '(minimap-window-location (quote right))
  '(scroll-bar-mode nil)
@@ -63,9 +65,6 @@
  '(ido-only-match ((t (:foreground "#ffcc33"))))
  '(ido-subdir ((t (:foreground "#66ff00"))))
  '(linum ((t (:inherit (shadow default) :foreground "gray25" :height 90))))
- '(markdown-header-face-1 ((t (:inherit markdown-header-face :height 1.5))))
- '(markdown-header-face-2 ((t (:inherit markdown-header-face :height 1.2))))
- '(markdown-header-face-3 ((t (:inherit markdown-header-face :height 1))))
  '(region ((t (:background "brown" :foreground "white")))))
 
 ;;; Packages
@@ -98,6 +97,7 @@
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
 ;;; Markdown Mode
+(require 'markdown-mode)
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
@@ -196,6 +196,9 @@
      )))
 
 (setq yas-prompt-functions '(yas-popup-isearch-prompt yas-ido-prompt yas-no-prompt))
+
+;; iEdit Mode
+(require 'iedit)
 
 ;; Hl line mode
 (global-hl-line-mode)
