@@ -45,14 +45,15 @@
  '(show-paren-mode t)
  '(transient-mark-mode t))
 
-(load "server")
-(unless (server-running-p) (server-start))
-
 ;;; For graphic emacs
 (if (display-graphic-p)
     (progn
       (tool-bar-mode nil)
-      (scroll-bar-mode nil)))
+      (scroll-bar-mode nil)
+      (load "server")
+      (unless (server-running-p) (server-start))
+      )
+)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -170,10 +171,16 @@
 ;; Magit
 (setq magit-last-seen-setup-instructions "1.4.0")
 
+;; Abbrev
+(setq abbrev-file-name "~/.emacs.d/abbrev_defs")
+
 ;; YAS
 (require 'yasnippet)
 (yas-global-mode 1)
 (yas-reload-all)
+
+;; COMPANY
+(require 'company)
 
 ;; Have YAS choose values use a popup menu
 (require 'popup)
@@ -209,6 +216,12 @@
 
 ;;; Elisp stuff
 (add-hook 'emacs-lisp-mode-hook 'company-mode)
+
+;;; Python stuff
+(require 'python-mode)
+(add-to-list 'company-backends 'company-jedi) ;; Basic usage.
+;; (add-to-list 'company-backends '(company-jedi company-files)) ;; Advanced usage.
+(add-hook 'python-mode-hook 'company-mode)
 
 ;;;;
 ;; OSX specific stuff
