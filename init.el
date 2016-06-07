@@ -37,18 +37,22 @@
  '(inhibit-startup-echo-area-message t)
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
- '(linum-format "%d")
+ '(linum-format "%d ")
  '(markdown-header-scaling t)
  '(markdown-header-scaling-values (quote (1.5 1.3 1.1 1.0 1.0 1.0)))
  '(menu-bar-mode nil)
  '(minimap-window-location (quote right))
- '(scroll-bar-mode nil)
  '(show-paren-mode t)
- '(tool-bar-mode nil)
  '(transient-mark-mode t))
 
 (load "server")
 (unless (server-running-p) (server-start))
+
+;;; For graphic emacs
+(if (display-graphic-p)
+    (progn
+      (tool-bar-mode nil)
+      (scroll-bar-mode nil)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
