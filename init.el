@@ -41,6 +41,7 @@
  '(markdown-header-scaling t)
  '(markdown-header-scaling-values (quote (1.5 1.3 1.1 1.0 1.0 1.0)))
  '(minimap-window-location (quote right))
+ '(py-python-command "python3")
  '(show-paren-mode t)
  '(transient-mark-mode t))
 
@@ -229,9 +230,8 @@
 
 ;;; Python stuff
 (require 'python-mode)
-(add-to-list 'company-backends 'company-jedi) ;; Basic usage.
-;; (add-to-list 'company-backends '(company-jedi company-files)) ;; Advanced usage.
-(add-hook 'python-mode-hook 'company-mode)
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
 
 ;;;;
 ;; OSX specific stuff
