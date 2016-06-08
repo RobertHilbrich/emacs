@@ -221,6 +221,7 @@
 
 ;; iEdit Mode
 (require 'iedit)
+(global-set-key (kbd "C-c i") 'iedit-mode)
 
 ;; Hl line mode
 (global-hl-line-mode)
