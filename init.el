@@ -40,20 +40,30 @@
  '(linum-format "%d ")
  '(markdown-header-scaling t)
  '(markdown-header-scaling-values (quote (1.5 1.3 1.1 1.0 1.0 1.0)))
- '(menu-bar-mode nil)
  '(minimap-window-location (quote right))
  '(show-paren-mode t)
  '(transient-mark-mode t))
 
 ;;; For graphic emacs
 (if (display-graphic-p)
-    (progn
-      (tool-bar-mode nil)
-      (scroll-bar-mode nil)
-      (load "server")
-      (unless (server-running-p) (server-start))
+    (if (eq system-type 'darwin)
+	(progn
+	  (tool-bar-mode -1)
+	  (menu-bar-mode t)
+	  (scroll-bar-mode -1)
+	  (load "server")
+	  (unless (server-running-p) (server-start)))
+      (progn
+	(tool-bar-mode -1)
+	(menu-bar-mode -1)
+	(scroll-bar-mode -1)
+	(load "server")
+	(unless (server-running-p) (server-start)))
       )
-)
+  (progn
+    (menu-bar-mode -1)
+    (scroll-bar-mode -1)
+  ))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
