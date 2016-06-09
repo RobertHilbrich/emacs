@@ -190,12 +190,12 @@
 (yas-global-mode 1)
 (yas-reload-all)
 
-;; COMPANY
-(require 'company)
+;; Auto-Complete
+(require 'auto-complete-config)
+(ac-config-default)
 
 ;; Have YAS choose values use a popup menu
 (require 'popup)
-; add some shotcuts in popup menu mode
 (define-key popup-menu-keymap (kbd "M-n") 'popup-next)
 (define-key popup-menu-keymap (kbd "TAB") 'popup-next)
 (define-key popup-menu-keymap (kbd "<tab>") 'popup-next)
@@ -225,9 +225,6 @@
 
 ;; Hl line mode
 (global-hl-line-mode)
-
-;;; Elisp stuff
-(add-hook 'emacs-lisp-mode-hook 'company-mode)
 
 ;;; Python stuff
 (require 'python-mode)
