@@ -43,7 +43,10 @@
  '(minimap-window-location (quote right))
  '(py-python-command "python3")
  '(show-paren-mode t)
- '(transient-mark-mode t))
+ '(transient-mark-mode t)
+ )
+
+
 
 ;;; For graphic emacs
 (if (display-graphic-p)
@@ -63,7 +66,6 @@
       )
   (progn
     (menu-bar-mode -1)
-    (scroll-bar-mode -1)
   ))
 
 (custom-set-faces
@@ -221,7 +223,6 @@
 
 ;; iEdit Mode
 (require 'iedit)
-(global-set-key (kbd "C-c i") 'iedit-mode)
 
 ;; Hl line mode
 (global-hl-line-mode)
