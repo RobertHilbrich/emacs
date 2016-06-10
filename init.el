@@ -34,6 +34,7 @@
  '(custom-enabled-themes (quote (wombat)))
  '(fringe-mode (quote (0)) nil (fringe))
  '(global-linum-mode t)
+ '(iedit-toggle-key-default nil)
  '(inhibit-startup-echo-area-message t)
  '(inhibit-startup-screen t)
  '(initial-scratch-message nil)
@@ -41,12 +42,8 @@
  '(markdown-header-scaling t)
  '(markdown-header-scaling-values (quote (1.5 1.3 1.1 1.0 1.0 1.0)))
  '(minimap-window-location (quote right))
- '(py-python-command "python3")
  '(show-paren-mode t)
- '(transient-mark-mode t)
- )
-
-
+ '(transient-mark-mode t))
 
 ;;; For graphic emacs
 (if (display-graphic-p)
@@ -74,14 +71,14 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Consolas" :foundry "outline" :slant normal :weight normal :height 128 :width normal))))
- '(company-preview ((t (:foreground "dim gray"))))
- '(company-preview-common ((t (:foreground "dim gray"))))
+ '(ac-completion-face ((t (:foreground "dim gray"))))
  '(hl-line ((t (:background "gray18"))))
  '(ido-first-match ((t (:foreground "#ccff66"))))
  '(ido-incomplete-regexp ((t (:foreground "#ffffff"))))
  '(ido-indicator ((t (:foreground "#ffffff"))))
  '(ido-only-match ((t (:foreground "#ffcc33"))))
  '(ido-subdir ((t (:foreground "#66ff00"))))
+ '(iedit-occurrence ((t (:inherit default :background "dark slate gray"))))
  '(linum ((t (:inherit (shadow default) :foreground "gray25" :height 90))))
  '(region ((t (:background "brown" :foreground "white")))))
 
@@ -223,6 +220,7 @@
 
 ;; iEdit Mode
 (require 'iedit)
+(global-set-key (kbd "C-c i") 'iedit-mode)
 
 ;; Hl line mode
 (global-hl-line-mode)
