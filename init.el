@@ -32,6 +32,9 @@
        " %o")))))
  '(TeX-view-program-selection (quote ((output-pdf "Sumatra PDF"))))
  '(custom-enabled-themes (quote (wombat)))
+ '(custom-safe-themes
+   (quote
+    ("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
  '(fringe-mode (quote (0)) nil (fringe))
  '(global-linum-mode t)
  '(iedit-toggle-key-default nil)
@@ -116,6 +119,12 @@
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+;;; Smart mode line
+(setq sml/theme 'powerline)
+(setq sml/no-confirm-load-theme t)
+(sml/setup)
+
 
 ;;; LaTeX
 (setq-default TeX-master nil) ; Query for master file.
