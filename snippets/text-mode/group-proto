@@ -5,7 +5,7 @@
 # binding: direct-keybinding
 # contributor: Robert Hilbrich
 # --
-# JourFixe `(insert (format-time-string "%d.%m.%Y"))`
+# Gruppentreffen `(insert (format-time-string "%d.%m.%Y"))`
 
 ## Anwesende
 * Behrisch, Michael
@@ -22,7 +22,7 @@
 ## TOP 2: Akquisen / Kundenkontakte
 * $0
 
-## TOP 3: Projekte
+## TOP 3: Neues aus den Projekten
 * ...
 
 ## TOP 4: Publikationen
