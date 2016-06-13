@@ -120,12 +120,6 @@
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
-;;; Smart mode line
-(setq sml/theme 'powerline)
-(setq sml/no-confirm-load-theme t)
-(sml/setup)
-
-
 ;;; LaTeX
 (setq-default TeX-master nil) ; Query for master file.
 (add-hook 'LaTeX-mode-hook 
