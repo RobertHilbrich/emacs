@@ -3,7 +3,7 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "python" "python.el" (22349 33672 0 0))
+;;;### (autoloads nil "python" "python.el" (22367 52390 0 0))
 ;;; Generated autoloads from python.el
 
 (add-to-list 'auto-mode-alist (cons (purecopy "\\.py\\'") 'python-mode))

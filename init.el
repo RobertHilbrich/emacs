@@ -103,8 +103,9 @@
  '(region ((t (:background "brown" :foreground "white")))))
 
 ;;; Packages
-(setq package-archives '(("gnu"   . "http://elpa.gnu.org/packages/")
-                         ("melpa" . "http://melpa.org/packages/")))
+(setq package-archives '(("gnu"          . "http://elpa.gnu.org/packages/")
+                         ("melpa-stable" . "http://stable.melpa.org/packages/")
+                         ("melpa"        . "http://melpa.org/packages/")))
 
 ;; Allow y/n for yes/no questions
 (defalias 'yes-or-no-p 'y-or-n-p)
