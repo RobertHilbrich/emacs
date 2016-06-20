@@ -56,6 +56,7 @@
  '(custom-enabled-themes (quote (wombat)))
  '(custom-safe-themes (quote (default)))
  '(default-major-mode (quote text-mode) t)
+ '(delete-selection-mode nil)
  '(fringe-mode 5 nil (fringe))
  '(ido-create-new-buffer (quote always))
  '(ido-enable-flex-matching t)
@@ -77,6 +78,7 @@
  '(markdown-enable-wiki-links t)
  '(markdown-header-scaling t)
  '(markdown-header-scaling-values (quote (1.5 1.3 1.1 1.0 1.0 1.0)))
+ '(python-shell-interpreter "python3")
  '(recentf-max-menu-items 10)
  '(recentf-mode t)
  '(scroll-conservatively 10000)
@@ -147,6 +149,8 @@
 
 ;;; Python stuff
 (add-hook 'python-mode-hook 'jedi:setup)
+(add-hook 'python-mode-hook 'flycheck-mode)
+(setq-default py-split-windows-on-execute-function 'split-window-horizontally)
 
 ;; Goto Homedirectory
 (setq default-directory (concat (getenv "HOME") "/"))
