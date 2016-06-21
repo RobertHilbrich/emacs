@@ -4,3 +4,4 @@
 /recentf
 /.python-environments/*
 /ac-comphist.dat
+*.elc
