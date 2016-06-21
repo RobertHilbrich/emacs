@@ -50,7 +50,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(TeX-auto-save t)
+ '(TeX-auto-untabify t)
+ '(TeX-clean-confirm nil)
+ '(TeX-master "nil")
+ '(TeX-parse-self t)
+ '(TeX-source-correlate-mode t)
+ '(TeX-source-correlate-start-server t)
  '(abbrev-file-name "~/.emacs.d/abbrev_defs")
+ '(auctex-latexmk-inherit-TeX-PDF-mode t)
  '(auto-save-default nil)
  '(auto-window-vscroll nil t)
  '(custom-enabled-themes (quote (wombat)))
@@ -68,7 +76,7 @@
  '(initial-scratch-message nil)
  '(ispell-program-name "aspell")
  '(jedi:complete-on-dot t)
- '(linum-format "%d ")
+ '(linum-format "%d")
  '(make-backup-files nil)
  '(markdown-coding-system (quote utf-8))
  '(markdown-command "multimarkdown")
@@ -83,6 +91,9 @@
  '(recentf-mode t)
  '(scroll-conservatively 10000)
  '(scroll-step 1)
+ '(sentence-end "[.?!][]\"')}]*\\($\\| \\| \\)[
+;;]*")
+ '(sentence-end-double-space nil)
  '(show-paren-mode t)
  '(transient-mark-mode t)
  '(user-full-name "Robert Hilbrich")
@@ -94,6 +105,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ac-completion-face ((t (:foreground "dim gray"))))
+ '(fringe ((t (:background "gray15"))))
  '(hl-line ((t (:background "gray18"))))
  '(ido-first-match ((t (:foreground "#ccff66"))))
  '(ido-incomplete-regexp ((t (:foreground "#ffffff"))))
@@ -101,7 +113,7 @@
  '(ido-only-match ((t (:foreground "#ffcc33"))))
  '(ido-subdir ((t (:foreground "#66ff00"))))
  '(iedit-occurrence ((t (:inherit default :background "dark slate gray"))))
- '(linum ((t (:inherit (shadow default) :foreground "gray25" :height 90))))
+ '(linum ((t (:inherit (shadow default) :foreground "gray40" :height 90))))
  '(region ((t (:background "brown" :foreground "white")))))
 
 ;;; Packages
@@ -153,6 +165,46 @@
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+;;; LaTeX Mode
+(add-hook 'LaTeX-mode-hook (lambda ()
+			     (reftex-mode)
+			     (visual-line-mode)
+			     (LaTeX-math-mode)
+			     (flyspell-mode)
+			     (TeX-fold-mode)
+			     (linum-mode)
+			     (setq fill-column 12000)
+			     (auto-fill-mode)
+			     (define-key LaTeX-mode-map (kbd "<f5>") 'TeX-command-master) 
+			     (define-key LaTeX-mode-map (kbd "<f6>") 'TeX-next-error)
+			     (define-key LaTeX-mode-map (kbd "<f7>") 'TeX-view)
+			     (auctex-latexmk-setup)
+			     (if (eq system-type 'windows-nt)
+				 (progn
+				   (setq TeX-command-default "Latexmk")
+				   (setq TeX-view-program-list '("SumatraPDF" ("SumatraPDF.exe -reuse-instance" (mode-io-correlate " -forward-search %b %n") " %o")))
+				   (setq TeX-view-program-selection '((output-pdf "SumatraPDF")))))))
+
+; Wenn ich bei M-q einen Satz pro Zeile haben will (also ein Enter nach jedem Satz-Ende!)
+(defadvice LaTeX-fill-region-as-paragraph (around LaTeX-sentence-filling)
+  "Start each sentence on a new line."
+  (let ((from (ad-get-arg 0))
+        (to-marker (set-marker (make-marker) (ad-get-arg 1)))
+        tmp-end)
+    (while (< from (marker-position to-marker))
+      (forward-sentence)
+      ;; might have gone beyond to-marker --- use whichever is smaller:
+      (ad-set-arg 1 (setq tmp-end (min (point) (marker-position to-marker))))
+      ad-do-it
+      (ad-set-arg 0 (setq from (point)))
+      (unless (or
+               (bolp)
+               (looking-at "\\s *$"))
+        (LaTeX-newline)))
+    (set-marker to-marker nil)))
+
+(ad-activate 'LaTeX-fill-region-as-paragraph)
 
 ;;; Text Mode
 (add-hook 'text-mode-hook 'flyspell-mode)
