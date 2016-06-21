@@ -114,11 +114,6 @@
 ;;; Recent Files
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
-;;; Markdown Mode
-(add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-
 ;; Auto-Complete
 (add-hook 'after-init-hook (lambda () (ac-config-default)))
 
@@ -147,10 +142,20 @@
 ;; Hl line mode
 (global-hl-line-mode)
 
-;;; Python stuff
+;;; Python Mode
+(autoload 'python-mode "python-mode" "Python Mode." t)
+(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+(add-to-list 'interpreter-mode-alist '("python" . python-mode))
 (add-hook 'python-mode-hook 'jedi:setup)
 (add-hook 'python-mode-hook 'flycheck-mode)
-(setq-default py-split-windows-on-execute-function 'split-window-horizontally)
+
+;;; Markdown Mode
+(add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+;;; Text Mode
+(add-hook 'text-mode-hook 'flyspell-mode)
 
 ;; Goto Homedirectory
 (setq default-directory (concat (getenv "HOME") "/"))
