@@ -155,13 +155,8 @@
 (global-hl-line-mode)
 
 ;;; Python Mode
-;; (autoload 'python-mode "python-mode" "Python Mode." t)
-;; (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
-;; (add-to-list 'interpreter-mode-alist '("python" . python-mode))
-;; (add-hook 'python-mode-hook 'jedi:setup)
-;; (add-hook 'python-mode-hook 'flycheck-mode)
 (add-hook 'after-init-hook 'elpy-enable)
-
+(add-hook 'python-mode-hook 'elpy-use-ipython)
 
 ;;; Markdown Mode
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
