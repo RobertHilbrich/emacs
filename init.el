@@ -88,6 +88,7 @@
  '(markdown-header-scaling-values (quote (1.5 1.3 1.1 1.0 1.0 1.0)))
  '(recentf-max-menu-items 10)
  '(recentf-mode t)
+ '(safe-local-variable-values (quote ((ispell-dictionary . "english"))))
  '(scroll-conservatively 10000)
  '(scroll-step 1)
  '(sentence-end "[.?!][]\"')}]*\\($\\| \\| \\)[
