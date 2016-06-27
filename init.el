@@ -86,7 +86,6 @@
  '(markdown-enable-wiki-links t)
  '(markdown-header-scaling t)
  '(markdown-header-scaling-values (quote (1.5 1.3 1.1 1.0 1.0 1.0)))
- '(python-shell-interpreter "python3")
  '(recentf-max-menu-items 10)
  '(recentf-mode t)
  '(scroll-conservatively 10000)
@@ -118,7 +117,8 @@
 
 ;;; Packages
 (setq package-archives '(("gnu"          . "http://elpa.gnu.org/packages/")
-                         ("melpa"        . "http://melpa.org/packages/")))
+                         ("melpa"        . "http://melpa.org/packages/")
+			 ("elpy"         . "http://jorgenschaefer.github.io/packages/")))
 
 ;; Allow y/n for yes/no questions
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -155,11 +155,13 @@
 (global-hl-line-mode)
 
 ;;; Python Mode
-(autoload 'python-mode "python-mode" "Python Mode." t)
-(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
-(add-to-list 'interpreter-mode-alist '("python" . python-mode))
-(add-hook 'python-mode-hook 'jedi:setup)
-(add-hook 'python-mode-hook 'flycheck-mode)
+;; (autoload 'python-mode "python-mode" "Python Mode." t)
+;; (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+;; (add-to-list 'interpreter-mode-alist '("python" . python-mode))
+;; (add-hook 'python-mode-hook 'jedi:setup)
+;; (add-hook 'python-mode-hook 'flycheck-mode)
+(add-hook 'after-init-hook 'elpy-enable)
+
 
 ;;; Markdown Mode
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
@@ -207,7 +209,7 @@
 (ad-activate 'LaTeX-fill-region-as-paragraph)
 
 ;;; Text Mode
-(add-hook 'text-mode-hook 'flyspell-mode)
+;;(add-hook 'text-mode-hook 'flyspell-mode)
 
 ;; Goto Homedirectory
 (setq default-directory (concat (getenv "HOME") "/"))
