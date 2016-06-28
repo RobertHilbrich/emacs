@@ -5,3 +5,5 @@
 /.python-environments/*
 /ac-comphist.dat
 *.elc
+ede-projects.el
+semanticdb/

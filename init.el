@@ -159,6 +159,19 @@
 (add-hook 'after-init-hook 'elpy-enable)
 (add-hook 'python-mode-hook 'elpy-use-ipython)
 
+;;; C/C++ Mode
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-hook 'c-mode-common-hook (lambda () (progn
+					   (add-to-list 'ac-sources 'ac-source-c-headers)
+					   (add-to-list 'ac-sources 'ac-source-semantic)
+					   (google-set-c-style)
+					   (google-make-newline-indent)
+					   (local-set-key (kbd "C-c o") 'ff-get-other-file)
+					   (semantic-mode)
+					   (global-ede-mode)
+					   (global-semantic-idle-scheduler-mode)
+					   (ggtags-mode))))
+
 ;;; Markdown Mode
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
