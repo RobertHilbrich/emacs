@@ -13,7 +13,9 @@
 	    (set-face-attribute 'default nil :family "Monaco")
 	    (set-face-attribute 'default nil :height 160)
 	    (load "server")
-	    (unless (server-running-p) (server-start))))
+	    (unless (server-running-p) (server-start))
+	    (setq exec-path (append exec-path '("/usr/local/bin")))
+	  ))
  
       ;; Linux
       (if (eq system-type 'gnu/linux)
@@ -59,6 +61,9 @@
  '(TeX-source-correlate-mode t)
  '(TeX-source-correlate-start-server t)
  '(abbrev-file-name "~/.emacs.d/abbrev_defs")
+ '(ac-modes
+   (quote
+    (emacs-lisp-mode lisp-mode lisp-interaction-mode c-mode cc-mode c++-mode java-mode javascript-mode js-mode php-mode css-mode makefile-mode sh-mode xml-mode web-mode)))
  '(auctex-latexmk-inherit-TeX-PDF-mode t)
  '(auto-save-default nil)
  '(auto-window-vscroll nil t)
@@ -66,6 +71,7 @@
  '(custom-safe-themes (quote (default)))
  '(default-major-mode (quote text-mode) t)
  '(delete-selection-mode nil)
+ '(flymake-fringe-indicator-position nil)
  '(fringe-mode 5 nil (fringe))
  '(ido-create-new-buffer (quote always))
  '(ido-enable-flex-matching t)
