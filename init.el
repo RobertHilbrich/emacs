@@ -112,7 +112,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ac-completion-face ((t (:foreground "dim gray"))))
+ '(ac-completion-face ((t (:foreground "gray30"))))
+ '(company-preview ((t (:inherit hl-line :foreground "gray30"))))
+ '(company-preview-common ((t (:inherit company-preview :foreground "gray30"))))
  '(fringe ((t (:background "gray15"))))
  '(hl-line ((t (:background "gray18"))))
  '(ido-first-match ((t (:foreground "#ccff66"))))
@@ -122,7 +124,8 @@
  '(ido-subdir ((t (:foreground "#66ff00"))))
  '(iedit-occurrence ((t (:inherit default :background "dark slate gray"))))
  '(linum ((t (:inherit (shadow default) :foreground "gray40" :height 90))))
- '(region ((t (:background "brown" :foreground "white")))))
+ '(region ((t (:background "brown" :foreground "white"))))
+ '(widget-field ((t (:background "gray25")))))
 
 ;;; Packages
 (setq package-archives '(("gnu"          . "http://elpa.gnu.org/packages/")
