@@ -72,7 +72,7 @@
  '(default-major-mode (quote text-mode) t)
  '(delete-selection-mode nil)
  '(flymake-fringe-indicator-position nil)
- '(fringe-mode 5 nil (fringe))
+ '(fringe-mode (quote (nil . 0)) nil (fringe))
  '(ido-create-new-buffer (quote always))
  '(ido-enable-flex-matching t)
  '(ido-everywhere t)
@@ -94,6 +94,7 @@
  '(markdown-enable-wiki-links t)
  '(markdown-header-scaling t)
  '(markdown-header-scaling-values (quote (1.5 1.3 1.1 1.0 1.0 1.0)))
+ '(menu-bar-mode nil)
  '(recentf-max-menu-items 10)
  '(recentf-mode t)
  '(safe-local-variable-values (quote ((ispell-dictionary . "english"))))
@@ -103,7 +104,7 @@
 ;;]*")
  '(sentence-end-double-space nil)
  '(show-paren-mode t)
- '(transient-mark-mode t)
+ '(tool-bar-mode nil)
  '(user-full-name "Robert Hilbrich")
  '(user-mail-address "Robert.Hilbrich@dlr.de"))
 
@@ -167,8 +168,13 @@
 (global-hl-line-mode)
 
 ;;; Python Mode
-(add-hook 'after-init-hook 'elpy-enable)
-(add-hook 'python-mode-hook 'elpy-use-ipython)
+(add-hook 'after-init-hook (lambda ()
+			     (progn
+			       (elpy-enable)
+			       (elpy-use-ipython)
+			       (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+			       (add-hook 'elpy-mode-hook 'flycheck-mode)
+			       (add-hook 'python-mode-hook 'py-autopep8-enable-on-save))))
 
 ;;; C/C++ Mode
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
