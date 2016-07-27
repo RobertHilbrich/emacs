@@ -72,7 +72,7 @@
  '(default-major-mode (quote text-mode) t)
  '(delete-selection-mode nil)
  '(flymake-fringe-indicator-position nil)
- '(fringe-mode (quote (nil . 0)) nil (fringe))
+ '(fringe-mode 8 nil (fringe))
  '(ido-create-new-buffer (quote always))
  '(ido-enable-flex-matching t)
  '(ido-everywhere t)
@@ -105,6 +105,7 @@
  '(sentence-end-double-space nil)
  '(show-paren-mode t)
  '(tool-bar-mode nil)
+ '(transient-mark-mode (quote (only . t)))
  '(user-full-name "Robert Hilbrich")
  '(user-mail-address "Robert.Hilbrich@dlr.de"))
 
@@ -128,10 +129,16 @@
  '(region ((t (:background "brown" :foreground "white"))))
  '(widget-field ((t (:background "gray25")))))
 
+;; We only want the line wrap indicator on the right side
+(setf (cdr (assq 'continuation fringe-indicator-alist))
+      '(nil right-curly-arrow)) ;; right indicator only
+
 ;;; Packages
 (setq package-archives '(("gnu"          . "http://elpa.gnu.org/packages/")
                          ("melpa"        . "http://melpa.org/packages/")
 			 ("elpy"         . "http://jorgenschaefer.github.io/packages/")))
+
+
 
 ;; Allow y/n for yes/no questions
 (defalias 'yes-or-no-p 'y-or-n-p)
