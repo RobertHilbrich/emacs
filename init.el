@@ -67,6 +67,7 @@
  '(auctex-latexmk-inherit-TeX-PDF-mode t)
  '(auto-save-default nil)
  '(auto-window-vscroll nil t)
+ '(c-basic-offset 4)
  '(custom-enabled-themes (quote (wombat)))
  '(custom-safe-themes (quote (default)))
  '(default-major-mode (quote text-mode) t)
@@ -186,10 +187,6 @@
 ;;; C/C++ Mode
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 (add-hook 'c-mode-common-hook (lambda () (progn
-					   (add-to-list 'ac-sources 'ac-source-c-headers)
-					   (add-to-list 'ac-sources 'ac-source-semantic)
-					   (google-set-c-style)
-					   (google-make-newline-indent)
 					   (local-set-key (kbd "C-c o") 'ff-get-other-file)
 					   (semantic-mode)
 					   (global-ede-mode)
