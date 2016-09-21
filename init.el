@@ -46,6 +46,15 @@
     (menu-bar-mode -1)
   ))
 
+;; correct the key bindings
+(if (eq system-uses-terminfo t)
+    (progn
+      (define-key input-decode-map "\e[D"  [C-left])
+      (define-key input-decode-map "\e[C"  [C-right])
+      (define-key input-decode-map "\e[A"  [C-up])
+      (define-key input-decode-map "\e[B"  [C-down])
+      (define-key input-decode-map "\e[4~" [end])
+      ))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
