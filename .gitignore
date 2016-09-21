@@ -4,6 +4,7 @@
 /recentf
 /.python-environments/*
 /ac-comphist.dat
+/elpa/*.pyc
 *.elc
 ede-projects.el
 semanticdb/
