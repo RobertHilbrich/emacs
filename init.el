@@ -105,6 +105,7 @@
  '(markdown-header-scaling t)
  '(markdown-header-scaling-values (quote (1.5 1.3 1.1 1.0 1.0 1.0)))
  '(menu-bar-mode nil)
+ '(python-shell-enable-font-lock nil)
  '(recentf-max-menu-items 10)
  '(recentf-mode t)
  '(safe-local-variable-values (quote ((ispell-dictionary . "english"))))
@@ -191,6 +192,8 @@
 			       (elpy-use-ipython)
 			       (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
 			       (add-hook 'elpy-mode-hook 'flycheck-mode)
+			       (add-hook 'python-mode-hook (lambda () (if (display-graphic-p)
+									    (linum-mode))))
 			       (add-hook 'python-mode-hook 'py-autopep8-enable-on-save))))
 
 ;;; C/C++ Mode
