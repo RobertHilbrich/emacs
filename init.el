@@ -81,6 +81,10 @@
  '(custom-safe-themes (quote (default)))
  '(default-major-mode (quote text-mode) t)
  '(delete-selection-mode nil)
+ '(eldoc-echo-area-use-multiline-p nil)
+ '(elpy-modules
+   (quote
+    (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-yasnippet elpy-module-sane-defaults)))
  '(flymake-fringe-indicator-position nil)
  '(fringe-mode 8 nil (fringe))
  '(ido-create-new-buffer (quote always))
@@ -190,11 +194,12 @@
 			     (progn
 			       (elpy-enable)
 			       (elpy-use-ipython)
-			       (highlight-indentation-mode nil)
 			       (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
 			       (add-hook 'elpy-mode-hook 'flycheck-mode)
-			       (add-hook 'python-mode-hook (lambda () (if (display-graphic-p)
-									    (linum-mode))))
+			       (add-hook 'python-mode-hook
+					 (lambda () (progn
+						      (if (display-graphic-p)
+							  (linum-mode)))))
 			       (add-hook 'python-mode-hook 'py-autopep8-enable-on-save))))
 
 ;;; C/C++ Mode
