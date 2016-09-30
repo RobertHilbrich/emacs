@@ -190,6 +190,7 @@
 			     (progn
 			       (elpy-enable)
 			       (elpy-use-ipython)
+			       (highlight-indentation-mode nil)
 			       (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
 			       (add-hook 'elpy-mode-hook 'flycheck-mode)
 			       (add-hook 'python-mode-hook (lambda () (if (display-graphic-p)
