@@ -8,3 +8,4 @@
 *.elc
 ede-projects.el
 semanticdb/
+*.pyc
