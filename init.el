@@ -1,9 +1,4 @@
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
 (package-initialize)
-
 
 ;;; For graphic emacs
 (if (display-graphic-p)
@@ -12,7 +7,7 @@
       (if (eq system-type 'darwin)
 	  (progn
 	    (tool-bar-mode -1)
-	    (menu-bar-mode t)
+	    (menu-bar-mode nil)
 	    (scroll-bar-mode -1)
 	    (setq mac-option-modifier nil)
 	    (setq mac-command-modifier 'meta)
@@ -54,14 +49,14 @@
   ))
 
 ;; correct the key bindings
-(if (eq system-uses-terminfo t)
-    (progn
-      (define-key input-decode-map "\e[D"  [C-left])
-      (define-key input-decode-map "\e[C"  [C-right])
-      (define-key input-decode-map "\e[A"  [C-up])
-      (define-key input-decode-map "\e[B"  [C-down])
-      (define-key input-decode-map "\e[4~" [end])
-      ))
+;; (if (eq system-uses-terminfo t)
+;;     (progn
+;;       (define-key input-decode-map "\e[D"  [C-left])
+;;       (define-key input-decode-map "\e[C"  [C-right])
+;;       (define-key input-decode-map "\e[A"  [C-up])
+;;       (define-key input-decode-map "\e[B"  [C-down])
+;;       (define-key input-decode-map "\e[4~" [end])
+;;       ))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -115,8 +110,11 @@
  '(markdown-enable-wiki-links t)
  '(markdown-header-scaling t)
  '(markdown-header-scaling-values (quote (1.5 1.3 1.1 1.0 1.0 1.0)))
- '(menu-bar-mode nil)
+ '(package-selected-packages
+   (quote
+    (python-mode python-info python-docstring py-autopep8 markdown-toc markdown-preview-mode magit jedi iedit google-c-style ggtags flycheck-irony elpy auto-complete-exuberant-ctags auto-complete-clang-async auto-complete-auctex auctex-latexmk ac-etags ac-c-headers)))
  '(python-shell-enable-font-lock nil)
+ '(python-shell-font-lock-enable nil)
  '(recentf-max-menu-items 10)
  '(recentf-mode t)
  '(safe-local-variable-values (quote ((ispell-dictionary . "english"))))
