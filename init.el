@@ -1,8 +1,5 @@
 (package-initialize)
 
-(setq python-shell-native-complete nil)
-
-
 ;;; For graphic emacs
 (if (display-graphic-p)
     (progn 
