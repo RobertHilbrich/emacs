@@ -88,7 +88,7 @@
    (quote
     (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-yasnippet elpy-module-sane-defaults)))
  '(flymake-fringe-indicator-position nil)
- '(fringe-mode 8 nil (fringe))
+ '(fringe-mode nil nil (fringe))
  '(ido-create-new-buffer (quote always))
  '(ido-enable-flex-matching t)
  '(ido-everywhere t)
