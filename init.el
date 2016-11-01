@@ -82,7 +82,7 @@
  '(custom-enabled-themes (quote (wombat)))
  '(custom-safe-themes (quote (default)))
  '(default-major-mode (quote text-mode) t)
- '(delete-selection-mode nil)
+ '(delete-selection-mode t)
  '(eldoc-echo-area-use-multiline-p nil)
  '(elpy-modules
    (quote
@@ -117,7 +117,10 @@
  '(python-shell-font-lock-enable nil)
  '(recentf-max-menu-items 10)
  '(recentf-mode t)
- '(safe-local-variable-values (quote ((ispell-dictionary . "english"))))
+ '(safe-local-variable-values
+   (quote
+    ((ispell-check-comments . off)
+     (ispell-dictionary . "english"))))
  '(scroll-conservatively 10000)
  '(scroll-step 1)
  '(sentence-end "[.?!][]\"')}]*\\($\\| \\| \\)[
@@ -263,6 +266,9 @@
 
 ;;; Text Mode
 ;;(add-hook 'text-mode-hook 'flyspell-mode)
+
+;; Magit
+(global-set-key (kbd "C-x g") 'magit-status)
 
 ;; Goto Homedirectory
 (setq default-directory (concat (getenv "HOME") "/"))
