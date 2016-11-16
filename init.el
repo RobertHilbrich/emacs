@@ -201,7 +201,8 @@
 (add-hook 'after-init-hook (lambda ()
 			     (progn
 			       (elpy-enable)
-			       (elpy-use-ipython)
+			       (when (executable-find "ipython")
+				 (elpy-use-ipython))
 			       (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
 			       (add-hook 'elpy-mode-hook 'flycheck-mode)
 			       (add-hook 'python-mode-hook
