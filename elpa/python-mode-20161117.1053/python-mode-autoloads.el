@@ -1,9 +1,10 @@
-;;; dash-autoloads.el --- automatically extracted autoloads
+;;; python-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil nil ("dash.el") (22572 6121 611285 695000))
+;;;### (autoloads nil nil ("python-mode-pkg.el" "python-mode.el")
+;;;;;;  (22574 52043 0 0))
 
 ;;;***
 
@@ -12,4 +13,4 @@
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
 ;; End:
-;;; dash-autoloads.el ends here
+;;; python-mode-autoloads.el ends here
