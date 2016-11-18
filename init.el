@@ -40,6 +40,7 @@
 	    (set-face-attribute 'default nil :height 128)
 	    (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin/")
 	    (setq ispell-dictionary "german8")
+	    (setq python-shell-completion-native-enable nil) ; necessary to have ipython working without warnings in windows
 	    (load "server")
 	    (unless (server-running-p) (server-start)))))
   
@@ -113,6 +114,7 @@
  '(package-selected-packages
    (quote
     (python-mode python-info python-docstring py-autopep8 markdown-toc markdown-preview-mode magit jedi iedit google-c-style ggtags flycheck-irony elpy auto-complete-exuberant-ctags auto-complete-clang-async auto-complete-auctex auctex-latexmk ac-etags ac-c-headers)))
+ '(python-indent-guess-indent-offset-verbose nil)
  '(python-shell-enable-font-lock nil)
  '(python-shell-font-lock-enable nil)
  '(recentf-max-menu-items 10)
@@ -202,7 +204,7 @@
 			     (progn
 			       (elpy-enable)
 			       (when (executable-find "ipython")
-				 (elpy-use-ipython))
+			       	 (elpy-use-ipython))
 			       (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
 			       (add-hook 'elpy-mode-hook 'flycheck-mode)
 			       (add-hook 'python-mode-hook
