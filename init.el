@@ -275,3 +275,6 @@
 
 ;; Goto Homedirectory
 (setq default-directory (concat (getenv "HOME") "/"))
+
+(markdown-mode)
+(visual-line-mode)
