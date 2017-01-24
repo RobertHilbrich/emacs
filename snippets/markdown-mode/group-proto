@@ -1,0 +1,38 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: template for the protocol of the group jour fixe at the DLR
+# key: jfx
+# group: DLR
+# binding: direct-keybinding
+# contributor: Robert Hilbrich
+# --
+# Gruppentreffen `(format-time-string "%d.%m.%Y" (current-time))`
+
+## Anwesende
+* Behrisch, Michael
+* Erdmann, Jakob
+* Flötteröd, Yun-Pang
+* Hilbrich, Robert
+* Lämmel, Gregor
+* Lücken, Leonhard
+* Wagner, Peter 
+
+## TOP 1: Runde
+* ...
+
+## TOP 2: Akquisen / Kundenkontakte
+* $0
+
+## TOP 3: Neues aus den Projekten
+* ...
+
+## TOP 4: SUMO User Conference 2017
+* ...
+
+## TOP 5: Publikationen
+* ...
+
+## TOP 6: Technische Infrastruktur
+* ...
+
+## TOP 7: Vermischtes
+* ...
