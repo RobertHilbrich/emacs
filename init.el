@@ -38,7 +38,7 @@
 	    (scroll-bar-mode -1)
 	    (set-face-attribute 'default nil :family "Consolas")
 	    (set-face-attribute 'default nil :height 128)
-	    (add-to-list 'exec-path "C:/Program Files (x86)/Aspell/bin/")
+	    (add-to-list 'exec-path "c:/Program Files (x86)/Aspell/bin/")
 	    (setq ispell-dictionary "german8")
 	    (setq python-shell-completion-native-enable nil) ; necessary to have ipython working without warnings in windows
 	    (load "server")
@@ -227,6 +227,7 @@
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
+
 ;;; LaTeX Mode
 (add-hook 'LaTeX-mode-hook (lambda ()
 			     (reftex-mode)
@@ -237,15 +238,17 @@
 			     (linum-mode)
 			     (setq fill-column 12000)
 			     (auto-fill-mode)
-			     (define-key LaTeX-mode-map (kbd "<f5>") 'TeX-command-master) 
+			     (define-key LaTeX-mode-map (kbd "<f5>") 'TeX-command-master)
 			     (define-key LaTeX-mode-map (kbd "<f6>") 'TeX-next-error)
 			     (define-key LaTeX-mode-map (kbd "<f7>") 'TeX-view)
 			     (auctex-latexmk-setup)
 			     (if (eq system-type 'windows-nt)
-				 (progn
-				   (setq TeX-command-default "Latexmk")
-				   (setq TeX-view-program-list '("SumatraPDF" ("SumatraPDF.exe -reuse-instance" (mode-io-correlate " -forward-search %b %n") " %o")))
-				   (setq TeX-view-program-selection '((output-pdf "SumatraPDF")))))))
+			     	 (progn
+			     	   (setq TeX-command-default "Latexmk")
+				   (setq TeX-command-force "Latexmk")
+			     	   (setq TeX-view-program-list '("SumatraPDF" ("SumatraPDF.exe -reuse-instance" (mode-io-correlate " -forward-search %b %n") " %o")))
+			     	   (setq TeX-view-program-selection '((output-pdf "SumatraPDF")))))
+			     ))
 
 ; Wenn ich bei M-q einen Satz pro Zeile haben will (also ein Enter nach jedem Satz-Ende!)
 (defadvice LaTeX-fill-region-as-paragraph (around LaTeX-sentence-filling)
@@ -267,14 +270,11 @@
 
 (ad-activate 'LaTeX-fill-region-as-paragraph)
 
-;;; Text Mode
-;;(add-hook 'text-mode-hook 'flyspell-mode)
-
 ;; Magit
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; Goto Homedirectory
-(setq default-directory (concat (getenv "HOME") "/"))
+(setq default-directory (concat (getenv "HOME") "/")) 
 
 (markdown-mode)
 (visual-line-mode)
