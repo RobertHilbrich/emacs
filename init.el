@@ -117,6 +117,12 @@
  '(python-indent-guess-indent-offset-verbose nil)
  '(python-shell-enable-font-lock nil)
  '(python-shell-font-lock-enable nil)
+ '(recentf-auto-cleanup 300)
+ '(recentf-exclude
+   (quote
+    ("COMMIT_EDITMSG\\'"
+     ".*-autoloads\\.el\\'"
+     "[/\\]\\elpa/")))
  '(recentf-max-menu-items 10)
  '(recentf-mode t)
  '(safe-local-variable-values
