@@ -88,6 +88,7 @@
  '(elpy-modules
    (quote
     (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-yasnippet elpy-module-sane-defaults)))
+ '(flycheck-flake8-maximum-line-length 160)
  '(flymake-fringe-indicator-position nil)
  '(fringe-mode nil nil (fringe))
  '(ido-create-new-buffer (quote always))
@@ -114,15 +115,14 @@
  '(package-selected-packages
    (quote
     (python-mode python-info python-docstring py-autopep8 markdown-toc markdown-preview-mode magit jedi iedit google-c-style ggtags flycheck-irony elpy auto-complete-exuberant-ctags auto-complete-clang-async auto-complete-auctex auctex-latexmk ac-etags ac-c-headers)))
+ '(py-autopep8-options (quote ("--max-line-length=160")))
  '(python-indent-guess-indent-offset-verbose nil)
  '(python-shell-enable-font-lock nil)
  '(python-shell-font-lock-enable nil)
  '(recentf-auto-cleanup 300)
  '(recentf-exclude
    (quote
-    ("COMMIT_EDITMSG\\'"
-     ".*-autoloads\\.el\\'"
-     "[/\\]\\elpa/")))
+    ("COMMIT_EDITMSG\\'" ".*-autoloads\\.el\\'" "[/\\]\\elpa/")))
  '(recentf-max-menu-items 10)
  '(recentf-mode t)
  '(safe-local-variable-values
@@ -215,6 +215,7 @@
 			       (add-hook 'elpy-mode-hook 'flycheck-mode)
 			       (add-hook 'python-mode-hook
 					 (lambda () (progn
+						      (local-set-key (kbd "M-*") 'pop-tag-mark)
 						      (if (display-graphic-p)
 							  (linum-mode)))))
 			       (add-hook 'python-mode-hook 'py-autopep8-enable-on-save))))
