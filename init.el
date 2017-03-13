@@ -27,6 +27,7 @@
 	    (scroll-bar-mode -1)
 	    (set-face-attribute 'default nil :family "Consolas")
 	    (set-face-attribute 'default nil :height 140)
+	    (custom-set-faces '(mode-line ((t (:background "#444444" :foreground "#f6f3e8" :box (:line-width 2 :color "#444444"))))))
 	    (load "server")
 	    (unless (server-running-p) (server-start))))
 
