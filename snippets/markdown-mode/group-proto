@@ -1,5 +1,5 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: template for the protocol of the group jour fixe at the DLR
+# name: DLR - Jour fixe
 # key: jfx
 # group: DLR
 # binding: direct-keybinding
@@ -20,6 +20,7 @@
 * ...
 
 ## TOP 2: Akquisen / Kundenkontakte
+* siehe Tabelle J:\TS-BDV\BDV_FK
 * $0
 
 ## TOP 3: Neues aus den Projekten
@@ -28,11 +29,14 @@
 ## TOP 4: SUMO User Conference 2017
 * ...
 
-## TOP 5: Publikationen
+## TOP 5: SUMO in der Eclipse Foundation
 * ...
 
-## TOP 6: Technische Infrastruktur
+## TOP 6: Publikationen
 * ...
 
-## TOP 7: Vermischtes
+## TOP 7: Technische Infrastruktur
+* ...
+
+## TOP 8: Vermischtes
 * ...

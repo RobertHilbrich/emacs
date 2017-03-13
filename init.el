@@ -34,6 +34,7 @@
       ;; Windows
       (if (eq system-type 'windows-nt)
 	  (progn
+	    (setq ffip-find-executable "c:\\\\cygwin64\\\\bin\\\\find")
 	    (tool-bar-mode -1)
 	    (menu-bar-mode -1)
 	    (scroll-bar-mode -1)
@@ -43,7 +44,8 @@
 	    (setq ispell-dictionary "german8")
 	    (setq python-shell-completion-native-enable nil) ; necessary to have ipython working without warnings in windows
 	    (load "server")
-	    (unless (server-running-p) (server-start)))))
+	    (unless (server-running-p) (server-start))
+    )))
   
   ;; Terminal
   (progn
@@ -115,7 +117,7 @@
  '(markdown-header-scaling-values (quote (1.5 1.3 1.1 1.0 1.0 1.0)))
  '(package-selected-packages
    (quote
-    (python-mode python-info python-docstring py-autopep8 markdown-toc markdown-preview-mode magit jedi iedit google-c-style ggtags flycheck-irony elpy auto-complete-exuberant-ctags auto-complete-clang-async auto-complete-auctex auctex-latexmk ac-etags ac-c-headers)))
+    (company-irony company-irony-c-headers python-mode python-info python-docstring py-autopep8 markdown-toc markdown-preview-mode magit jedi iedit google-c-style ggtags flycheck-irony elpy auto-complete-exuberant-ctags auto-complete-clang-async auto-complete-auctex auctex-latexmk ac-etags ac-c-headers)))
  '(py-autopep8-options (quote ("--max-line-length=160")))
  '(python-indent-guess-indent-offset-verbose nil)
  '(python-shell-enable-font-lock nil)
