@@ -10,4 +10,4 @@ ede-projects.el
 semanticdb/
 *.pyc
 /bookmarks
-/irony/bin/*
+/irony/*
