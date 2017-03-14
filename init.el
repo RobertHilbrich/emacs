@@ -29,7 +29,9 @@
 	    (set-face-attribute 'default nil :height 128)
 	    (custom-set-faces '(mode-line ((t (:background "#444444" :foreground "#f6f3e8" :box (:line-width 2 :color "#444444"))))))
 	    (load "server")
-	    (unless (server-running-p) (server-start))))
+	    (unless (server-running-p) (server-start))
+	    (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/rtags/")
+	    (require 'rtags)))
 
       ;; Windows
       (if (eq system-type 'windows-nt)
@@ -78,11 +80,15 @@
  '(abbrev-file-name "~/.emacs.d/abbrev_defs")
  '(ac-modes
    (quote
-    (emacs-lisp-mode lisp-mode lisp-interaction-mode c-mode cc-mode c++-mode java-mode javascript-mode js-mode php-mode css-mode makefile-mode sh-mode xml-mode web-mode)))
+    (emacs-lisp-mode lisp-mode lisp-interaction-mode java-mode javascript-mode js-mode php-mode css-mode makefile-mode sh-mode xml-mode web-mode)))
  '(auctex-latexmk-inherit-TeX-PDF-mode t)
  '(auto-save-default nil)
  '(auto-window-vscroll nil t)
  '(c-basic-offset 4)
+ '(company-global-modes (quote (c-mode c++-mode)))
+ '(company-idle-delay 0.1)
+ '(company-minimum-prefix-length 2)
+ '(company-selection-wrap-around t)
  '(custom-enabled-themes (quote (wombat)))
  '(custom-safe-themes (quote (default)))
  '(default-major-mode (quote text-mode) t)
@@ -94,6 +100,7 @@
  '(flycheck-flake8-maximum-line-length 160)
  '(flymake-fringe-indicator-position nil)
  '(fringe-mode nil nil (fringe))
+ '(global-company-mode t)
  '(ido-create-new-buffer (quote always))
  '(ido-enable-flex-matching t)
  '(ido-everywhere t)
@@ -160,6 +167,7 @@
  '(ido-subdir ((t (:foreground "#66ff00"))))
  '(iedit-occurrence ((t (:inherit default :background "dark slate gray"))))
  '(linum ((t (:inherit (shadow default) :foreground "gray40" :height 90))))
+ '(mode-line ((t (:background "#444444" :foreground "#f6f3e8" :box (:line-width 2 :color "#444444")))))
  '(region ((t (:background "brown" :foreground "white"))))
  '(widget-field ((t (:background "gray25")))))
 
@@ -227,10 +235,40 @@
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 (add-hook 'c-mode-common-hook (lambda () (progn
 					   (local-set-key (kbd "C-c o") 'ff-get-other-file)
-					   (semantic-mode)
-					   (global-ede-mode)
-					   (global-semantic-idle-scheduler-mode)
-					   (ggtags-mode))))
+					   (define-key c-mode-base-map (kbd "M-.")
+					     (function rtags-find-symbol-at-point))
+					   (define-key c-mode-base-map (kbd "M-,")
+					     (function rtags-find-references-at-point))
+					   (define-key c-mode-base-map (kbd "M-*")
+					     (function rtags-location-stack-back))
+					   (define-key c-mode-base-map (kbd "M-'")
+					     (function rtags-location-stack-forward))
+					   (rtags-start-process-unless-running)
+					   (rtags-enable-standard-keybindings)
+					   (setq-local flycheck-highlighting-mode nil)
+					   (setq-local flycheck-check-syntax-automatically nil)
+					   (flycheck-mode)
+					   (irony-mode)
+					   (company-mode)
+					   )))
+
+;; replace the `completion-at-point' and `complete-symbol' bindings in
+;; irony-mode's buffers by irony-mode's function
+(defun my-irony-mode-hook ()
+  (define-key irony-mode-map [remap completion-at-point]
+    'irony-completion-at-point-async)
+  (define-key irony-mode-map [remap complete-symbol]
+    'irony-completion-at-point-async))
+(add-hook 'irony-mode-hook 'my-irony-mode-hook)
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+
+(eval-after-load 'company
+  '(add-to-list 'company-backends 'company-irony))
+
+(eval-after-load 'company
+  '(progn
+     (define-key company-active-map (kbd "TAB") 'company-complete)
+     (define-key company-active-map [tab] 'company-complete)))
 
 ;;; Markdown Mode
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
