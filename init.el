@@ -89,6 +89,7 @@
  '(company-idle-delay 0.1)
  '(company-minimum-prefix-length 2)
  '(company-selection-wrap-around t)
+ '(compilation-scroll-output (quote first-error))
  '(custom-enabled-themes (quote (wombat)))
  '(custom-safe-themes (quote (default)))
  '(default-major-mode (quote text-mode) t)
@@ -226,7 +227,7 @@
 			       (add-hook 'elpy-mode-hook 'flycheck-mode)
 			       (add-hook 'python-mode-hook
 					 (lambda () (progn
-						      (local-set-key (kbd "M-*") 'pop-tag-mark)
+						      (local-set-key (kbd "M-+") 'pop-tag-mark)
 						      (if (display-graphic-p)
 							  (linum-mode)))))
 			       (add-hook 'python-mode-hook 'py-autopep8-enable-on-save))))
@@ -235,19 +236,22 @@
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 (add-hook 'c-mode-common-hook (lambda () (progn
 					   (local-set-key (kbd "C-c o") 'ff-get-other-file)
+					   (local-set-key (kbd "<f5>") 'compile)
+					   (local-set-key (kbd "<f6>") 'recompile)
 					   (define-key c-mode-base-map (kbd "M-.")
 					     (function rtags-find-symbol-at-point))
 					   (define-key c-mode-base-map (kbd "M-,")
 					     (function rtags-find-references-at-point))
-					   (define-key c-mode-base-map (kbd "M-*")
+					   (define-key c-mode-base-map (kbd "M-+")
 					     (function rtags-location-stack-back))
-					   (define-key c-mode-base-map (kbd "M-'")
+					   (define-key c-mode-base-map (kbd "M-#")
 					     (function rtags-location-stack-forward))
 					   (rtags-start-process-unless-running)
 					   (rtags-enable-standard-keybindings)
 					   (setq-local flycheck-highlighting-mode nil)
 					   (setq-local flycheck-check-syntax-automatically nil)
 					   (flycheck-mode)
+					   (require 'flycheck-rtags)
 					   (irony-mode)
 					   (company-mode)
 					   )))
@@ -262,13 +266,12 @@
 (add-hook 'irony-mode-hook 'my-irony-mode-hook)
 (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
-(eval-after-load 'company
-  '(add-to-list 'company-backends 'company-irony))
-
+(require 'company-irony-c-headers)
 (eval-after-load 'company
   '(progn
      (define-key company-active-map (kbd "TAB") 'company-complete)
-     (define-key company-active-map [tab] 'company-complete)))
+     (define-key company-active-map [tab] 'company-complete)
+     (add-to-list 'company-backends '(company-irony-c-headers company-irony))))
 
 ;;; Markdown Mode
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
