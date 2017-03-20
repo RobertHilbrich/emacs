@@ -101,6 +101,7 @@
  '(flycheck-flake8-maximum-line-length 160)
  '(flymake-fringe-indicator-position nil)
  '(fringe-mode nil nil (fringe))
+ '(global-auto-revert-mode t)
  '(global-company-mode t)
  '(ido-create-new-buffer (quote always))
  '(ido-enable-flex-matching t)
