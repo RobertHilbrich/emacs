@@ -82,6 +82,8 @@
    (quote
     (emacs-lisp-mode lisp-mode lisp-interaction-mode java-mode javascript-mode js-mode php-mode css-mode makefile-mode sh-mode xml-mode web-mode)))
  '(auctex-latexmk-inherit-TeX-PDF-mode t)
+ '(auto-revert-check-vc-info t)
+ '(auto-revert-interval 1)
  '(auto-save-default nil)
  '(auto-window-vscroll nil t)
  '(c-basic-offset 4)
@@ -99,10 +101,13 @@
    (quote
     (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-yasnippet elpy-module-sane-defaults)))
  '(flycheck-flake8-maximum-line-length 160)
+ '(flycheck-global-modes (quote (elpy-mode python-mode latex-mode c++-mode c-mode)))
  '(flymake-fringe-indicator-position nil)
  '(fringe-mode nil nil (fringe))
  '(global-auto-revert-mode t)
+ '(global-auto-revert-mode-text " ARev")
  '(global-company-mode t)
+ '(global-flycheck-mode t)
  '(ido-create-new-buffer (quote always))
  '(ido-enable-flex-matching t)
  '(ido-everywhere t)
@@ -126,7 +131,7 @@
  '(markdown-header-scaling-values (quote (1.5 1.3 1.1 1.0 1.0 1.0)))
  '(package-selected-packages
    (quote
-    (helm company-irony company-irony-c-headers python-mode python-info python-docstring py-autopep8 markdown-toc markdown-preview-mode magit jedi iedit google-c-style ggtags flycheck-irony elpy auto-complete-exuberant-ctags auto-complete-clang-async auto-complete-auctex auctex-latexmk ac-etags ac-c-headers)))
+    (flycheck-color-mode-line helm company-irony company-irony-c-headers python-mode python-info python-docstring py-autopep8 markdown-toc markdown-preview-mode magit jedi iedit google-c-style ggtags flycheck-irony elpy auto-complete-exuberant-ctags auto-complete-clang-async auto-complete-auctex auctex-latexmk ac-etags ac-c-headers)))
  '(py-autopep8-options (quote ("--max-line-length=160")))
  '(python-indent-guess-indent-offset-verbose nil)
  '(python-shell-enable-font-lock nil)
@@ -139,7 +144,8 @@
  '(recentf-mode t)
  '(safe-local-variable-values
    (quote
-    ((ispell-check-comments . off)
+    ((flycheck-clang-include-path . "/home/hilb_ro/Development/SUMO/sumo/src")
+     (ispell-check-comments . off)
      (ispell-dictionary . "english"))))
  '(scroll-conservatively 10000)
  '(scroll-step 1)
@@ -190,6 +196,9 @@
 ;;; Recent Files
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
+;;; Pop tag mark
+(global-set-key "\M-*" 'pop-tag-mark)
+
 ;; Auto-Complete
 (add-hook 'after-init-hook (lambda () (ac-config-default)))
 
@@ -225,7 +234,6 @@
 			       (when (executable-find "ipython")
 			       	 (elpy-use-ipython))
 			       (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-			       (add-hook 'elpy-mode-hook 'flycheck-mode)
 			       (add-hook 'python-mode-hook
 					 (lambda () (progn
 						      (local-set-key (kbd "M-+") 'pop-tag-mark)
@@ -249,21 +257,17 @@
 					     (function rtags-location-stack-forward))
 					   (rtags-start-process-unless-running)
 					   (rtags-enable-standard-keybindings)
-					   (setq-local flycheck-highlighting-mode nil)
-					   (setq-local flycheck-check-syntax-automatically nil)
-					   (flycheck-mode)
-					   (require 'flycheck-rtags)
 					   (irony-mode)
+					   (irony-cdb-json-add-compile-commands-path "/home/hilb_ro/Development/SUMO/sumo" "/home/hilb_ro/Development/SUMO/sumo/compile_commands.json")
+					   (linum-mode)
 					   (company-mode)
 					   )))
 
 ;; replace the `completion-at-point' and `complete-symbol' bindings in
 ;; irony-mode's buffers by irony-mode's function
 (defun my-irony-mode-hook ()
-  (define-key irony-mode-map [remap completion-at-point]
-    'irony-completion-at-point-async)
-  (define-key irony-mode-map [remap complete-symbol]
-    'irony-completion-at-point-async))
+  (define-key irony-mode-map [remap completion-at-point] 'irony-completion-at-point-async)
+  (define-key irony-mode-map [remap complete-symbol] 'irony-completion-at-point-async))
 (add-hook 'irony-mode-hook 'my-irony-mode-hook)
 (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
