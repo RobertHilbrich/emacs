@@ -293,10 +293,10 @@
 			     (define-key LaTeX-mode-map (kbd "<f6>") 'TeX-next-error)
 			     (define-key LaTeX-mode-map (kbd "<f7>") 'TeX-view)
 			     (auctex-latexmk-setup)
+		     	     (setq TeX-command-default "Latexmk")
+			     (setq TeX-command-force "Latexmk")
 			     (if (eq system-type 'windows-nt)
 			     	 (progn
-			     	   (setq TeX-command-default "Latexmk")
-				   (setq TeX-command-force "Latexmk")
 			     	   (setq TeX-view-program-list '("SumatraPDF" ("SumatraPDF.exe -reuse-instance" (mode-io-correlate " -forward-search %b %n") " %o")))
 			     	   (setq TeX-view-program-selection '((output-pdf "SumatraPDF")))))
 			     ))
