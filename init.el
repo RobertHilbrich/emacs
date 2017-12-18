@@ -13,10 +13,11 @@
 	    (setq mac-command-modifier 'meta)
 	    (setq x-select-enable-clipboard t)  
 	    (set-face-attribute 'default nil :family "Monaco")
-	    (set-face-attribute 'default nil :height 160)
+	    (set-face-attribute 'default nil :height 180)
 	    (load "server")
 	    (unless (server-running-p) (server-start))
 	    (setq exec-path (append exec-path '("/usr/local/bin")))
+	    (exec-path-from-shell-initialize)
 	  ))
  
       ;; Linux
@@ -72,7 +73,6 @@
  '(TeX-auto-save t)
  '(TeX-auto-untabify t)
  '(TeX-clean-confirm nil)
-;; '(TeX-master "nil")
  '(TeX-parse-self t)
  '(TeX-save-query nil)
  '(TeX-source-correlate-mode t)
@@ -82,8 +82,6 @@
    (quote
     (emacs-lisp-mode lisp-mode lisp-interaction-mode java-mode javascript-mode js-mode php-mode css-mode makefile-mode sh-mode xml-mode web-mode)))
  '(auctex-latexmk-inherit-TeX-PDF-mode t)
-;; '(auto-revert-check-vc-info t)
-;; '(auto-revert-interval 1)
  '(auto-save-default nil)
  '(auto-window-vscroll nil t)
  '(c-basic-offset 4)
@@ -104,10 +102,7 @@
  '(flycheck-global-modes (quote (elpy-mode python-mode latex-mode c++-mode c-mode)))
  '(flymake-fringe-indicator-position nil)
  '(fringe-mode nil nil (fringe))
-;; '(global-auto-revert-mode t)
-;; '(global-auto-revert-mode-text " ARev")
  '(global-company-mode t)
-;; '(global-flycheck-mode t)
  '(ido-create-new-buffer (quote always))
  '(ido-enable-flex-matching t)
  '(ido-everywhere t)
@@ -131,7 +126,7 @@
  '(markdown-header-scaling-values (quote (1.5 1.3 1.1 1.0 1.0 1.0)))
  '(package-selected-packages
    (quote
-    (flycheck-color-mode-line helm company-irony company-irony-c-headers python-mode python-info python-docstring py-autopep8 markdown-toc markdown-preview-mode magit jedi iedit google-c-style ggtags flycheck-irony elpy auto-complete-exuberant-ctags auto-complete-clang-async auto-complete-auctex auctex-latexmk ac-etags ac-c-headers)))
+    (exec-path-from-shell flycheck-color-mode-line helm company-irony company-irony-c-headers python-mode python-info python-docstring py-autopep8 markdown-toc markdown-preview-mode magit jedi iedit google-c-style ggtags flycheck-irony elpy auto-complete-exuberant-ctags auto-complete-clang-async auto-complete-auctex auctex-latexmk ac-etags ac-c-headers)))
  '(py-autopep8-options (quote ("--max-line-length=160")))
  '(python-indent-guess-indent-offset-verbose nil)
  '(python-shell-enable-font-lock nil)
