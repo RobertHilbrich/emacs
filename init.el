@@ -38,6 +38,7 @@
       (if (eq system-type 'windows-nt)
 	  (progn
 	    (setq ffip-find-executable "c:\\\\cygwin64\\\\bin\\\\find")
+	    (setq magit-git-executable "C:/Program Files/Git/bin/git.exe")
 	    (tool-bar-mode -1)
 	    (menu-bar-mode -1)
 	    (scroll-bar-mode -1)
@@ -323,6 +324,7 @@
 
 ;; Magit
 (global-set-key (kbd "C-x g") 'magit-status)
+(setq magit-refresh-status-buffer nil) ; make magit potentially faster
 
 ;; Goto Homedirectory
 (setq default-directory (concat (getenv "HOME") "/")) 
