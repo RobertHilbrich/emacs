@@ -99,6 +99,7 @@
  '(elpy-modules
    (quote
     (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-yasnippet elpy-module-sane-defaults)))
+ '(elpy-rpc-python-command "python3")
  '(flycheck-flake8-maximum-line-length 160)
  '(flycheck-global-modes (quote (elpy-mode python-mode latex-mode c++-mode c-mode)))
  '(flymake-fringe-indicator-position nil)
@@ -132,6 +133,7 @@
  '(python-indent-guess-indent-offset-verbose nil)
  '(python-shell-enable-font-lock nil)
  '(python-shell-font-lock-enable nil)
+ '(python-shell-interpreter "python3")
  '(recentf-auto-cleanup 300)
  '(recentf-exclude
    (quote
@@ -228,7 +230,8 @@
 			     (progn
 			       (elpy-enable)
 			       (when (executable-find "ipython")
-			       	 (elpy-use-ipython))
+			       	 (setq python-shell-interpreter "ipython"
+				       python-shell-interpreter-args "-i --simple-prompt"))
 			       (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
 			       (add-hook 'python-mode-hook
 					 (lambda () (progn
@@ -237,42 +240,6 @@
 							  (linum-mode)))))
 			       (add-hook 'python-mode-hook 'py-autopep8-enable-on-save))))
 
-;;; C/C++ Mode
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-(add-hook 'c-mode-common-hook (lambda () (progn
-					   (local-set-key (kbd "C-c o") 'ff-get-other-file)
-					   (local-set-key (kbd "<f5>") 'compile)
-					   (local-set-key (kbd "<f6>") 'recompile)
-					   (define-key c-mode-base-map (kbd "M-.")
-					     (function rtags-find-symbol-at-point))
-					   (define-key c-mode-base-map (kbd "M-,")
-					     (function rtags-find-references-at-point))
-					   (define-key c-mode-base-map (kbd "M-+")
-					     (function rtags-location-stack-back))
-					   (define-key c-mode-base-map (kbd "M-#")
-					     (function rtags-location-stack-forward))
-					   (rtags-start-process-unless-running)
-					   (rtags-enable-standard-keybindings)
-					   (irony-mode)
-					   (irony-cdb-json-add-compile-commands-path "/home/hilb_ro/Development/SUMO/sumo" "/home/hilb_ro/Development/SUMO/sumo/compile_commands.json")
-					   (linum-mode)
-					   (company-mode)
-					   )))
-
-;; replace the `completion-at-point' and `complete-symbol' bindings in
-;; irony-mode's buffers by irony-mode's function
-(defun my-irony-mode-hook ()
-  (define-key irony-mode-map [remap completion-at-point] 'irony-completion-at-point-async)
-  (define-key irony-mode-map [remap complete-symbol] 'irony-completion-at-point-async))
-(add-hook 'irony-mode-hook 'my-irony-mode-hook)
-(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-
-(require 'company-irony-c-headers)
-(eval-after-load 'company
-  '(progn
-     (define-key company-active-map (kbd "TAB") 'company-complete)
-     (define-key company-active-map [tab] 'company-complete)
-     (add-to-list 'company-backends '(company-irony-c-headers company-irony))))
 
 ;;; Markdown Mode
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
